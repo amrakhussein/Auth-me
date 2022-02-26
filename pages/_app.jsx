@@ -1,10 +1,19 @@
 import '../styles/globals.css';
 import Link from 'next/link';
+import { SessionProvider } from "next-auth/react"
 
-function MyApp({ Component, pageProps }) {
+
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   // this component > every page
 
   return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+
+
     <div>
       <nav>
         <ul>
@@ -31,6 +40,7 @@ function MyApp({ Component, pageProps }) {
         </ul>
       </nav>
     </div>
+    </SessionProvider>
   );
 }
 
